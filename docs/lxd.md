@@ -50,12 +50,12 @@ proxy() {
   lxc config device add "$instance" "proxy-$proto-$port" proxy "listen=$proto:0.0.0.0:$port" "connect=$proto:127.0.0.1:$port"
 }
 
-both() {
+add() {
   proto=tcp proxy
   proto=udp proxy
 }
 
-port=25565 both
+port=25565 add
 ```
 
 Run shell for user "ubuntu" in container:
