@@ -1,0 +1,217 @@
+#!/usr/bin/env bash
+
+#  Copyright 2024 Oakdeer project contributors
+#
+#  Licensed under the Apache License, Version 2.0 (the "License");
+#  you may not use this file except in compliance with the License.
+#  You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing, software
+#  distributed under the License is distributed on an "AS IS" BASIS,
+#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#  See the License for the specific language governing permissions and
+#  limitations under the License.
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+fail() {
+  local exit_status=1
+  local i
+
+  while [ "$#" -gt 0 ]; do
+    case "$1" in
+      -e|--exit-status)
+        exit_status="$2"
+        shift; shift
+        ;;
+      *)
+        break
+        ;;
+    esac
+  done
+
+  echo "${1:-"Abnormal termination"}" >&2
+
+  # Display the stack trace
+  for (( i=1; i <= ${#BASH_LINENO[@]}-1; i++ )); do
+    echo "  from ${BASH_SOURCE[i]}:${BASH_LINENO[i-1]} in ${FUNCNAME[i]}()" >&2
+  done
+
+  exit "$exit_status"
+}
+
+service_name="$(basename "$PWD")" || fail
+
+while [ "$#" -gt 0 ]; do
+  case "$1" in
+    -h|--heap-size)
+      heap_size="$2"
+      shift; shift
+      ;;
+    -s|--service-name)
+      service_name="$2"
+      shift; shift
+      ;;
+    -*)
+      echo "Unknown option: $1" >&2
+      exit 1
+      ;;
+    *)
+      break
+      ;;
+  esac
+done
+
+if [ "$#" = 0 ]; then
+  cat >&2 <<EOF || fail
+Usage:
+
+  oak [OPTIONS...] COMMAND [ARGUMENTS...]
+
+Options:
+
+  --heap-size 6G (if no heap size is specified, OpenJDK defaults will be used, which may be too small for a Minecraft server)
+  --service-name my-server (by default the name of the current directory will be used)
+
+Commands:
+
+  deploy [https://example.com/server.jar] (if there is no URL, only the service unit will be updated)
+
+  start
+  stop
+  restart
+
+  enable
+  disable
+
+  status
+  log
+
+Prefix any command with "log" to monitor the service log after the command has successfully completed:
+
+  oak log restart
+
+EOF
+  exit
+fi
+
+deploy() {
+  local jar_url="$1"
+  local jar_name
+  local temp_file
+  
+  jar_name="$(basename "$jar_url")" || fail
+
+  # download jar file
+  temp_file="$(mktemp)" || fail
+
+  curl --fail --location --show-error --silent "$jar_url" -o "$temp_file" || fail
+  mv "$temp_file" "$jar_name" || fail
+
+  # create dir for user units
+  ( umask 077 && mkdir --parents "$HOME/.config/systemd/user" ) || fail
+
+  # write unit file
+  temp_file="$(mktemp)" || fail
+  cat >"$temp_file" <<EOF || fail
+[Unit]
+Description=$service_name minecraft server
+
+[Service]
+Restart=always
+RestartSec=5s
+Type=exec
+WorkingDirectory=$PWD
+
+# -XX:+PerfDisableSharedMem -- I don't know if that's still relevant
+#                              https://www.evanjones.ca/jvm-mmap-pause.html
+#                              https://groups.google.com/g/mechanical-sympathy/c/9SP4IM-MUrI
+#
+# https://wiki.openjdk.org/display/zgc
+# https://wiki.openjdk.org/display/zgc#Main-ReturningUnusedMemorytotheOperatingSystem
+#
+# FFR:
+#   jcmd <PID> GC.heap_info
+#   https://wiki.openjdk.org/display/shenandoah/Main
+#   java -XX:+UnlockExperimentalVMOptions -XX:+PrintFlagsFinal --version | grep UnlockExperimentalVMOptions
+#   https://chriswhocodes.com/vm-options-explorer.html
+
+ExecStart=/usr/bin/java \
+  -XX:+AlwaysPreTouch \
+  -XX:+DisableExplicitGC \
+  -XX:+PerfDisableSharedMem \
+  -XX:+UseZGC \
+  -XX:+ZGenerational \
+  ${heap_size:+"-Xms$heap_size"} \
+  ${heap_size:+"-Xmx$heap_size"} \
+  -jar $jar_name \
+  --nogui
+
+LockPersonality=true
+NoNewPrivileges=true
+PrivateDevices=true
+PrivateTmp=true
+PrivateUsers=true
+ProtectClock=true
+ProtectControlGroups=true
+ProtectKernelLogs=true
+ProtectKernelModules=true
+ProtectKernelTunables=true
+ProtectSystem=full
+RestrictSUIDSGID=true
+
+[Install]
+WantedBy=default.target
+EOF
+
+  # replace unit file
+  mv "$temp_file" "$HOME/.config/systemd/user/$service_name.service" || fail
+
+  # start service
+  systemctl --user --quiet reenable "$service_name.service" || fail
+  systemctl --user restart "$service_name.service" || fail
+}
+
+log() {
+  # run a command if it is specified in the call arguments
+  if [ "$#" -gt 0 ]; then
+    commence "$@" || fail
+  fi
+  journalctl --user -u "$service_name.service" --since "5min ago" --follow || fail
+}
+
+status() {
+  local exit_status=0
+
+  systemctl --user status "$service_name.service" || exit_status=$?
+
+  if [ "$exit_status" = 0 ]; then
+    return
+  elif [ "$exit_status" = 3 ]; then
+    # the exit status value is 3 if the service is not running
+    exit 3
+  else
+    fail --exit-status "$exit_status"
+  fi
+}
+
+commence() {
+  case "$1" in
+    start|stop|restart)
+      systemctl --user "$1" "$service_name.service" || fail
+      ;;
+    enable|disable)
+      systemctl --user --now "$1" "$service_name.service" || fail
+      ;;
+    *)
+      # run a function, the function name will be obtained from the first argument
+      "$@" || fail
+      ;;
+  esac
+}
+
+commence "$@" || fail
