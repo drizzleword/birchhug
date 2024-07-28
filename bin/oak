@@ -41,10 +41,10 @@ fail() {
     echo "  from ${BASH_SOURCE[i]}:${BASH_LINENO[i-1]} in ${FUNCNAME[i]}()" >&2
   done
 
-  exit "$exit_status"
+  exit "${exit_status}"
 }
 
-service_name="$(basename "$PWD")" || fail
+service_name="$(basename "${PWD}")" || fail
 
 while [ "$#" -gt 0 ]; do
   case "$1" in
@@ -104,28 +104,28 @@ deploy() {
   local jar_name
   local temp_file
   
-  jar_name="$(basename "$jar_url")" || fail
+  jar_name="$(basename "${jar_url}")" || fail
 
   # download jar file
   temp_file="$(mktemp)" || fail
 
-  curl --fail --location --show-error --silent "$jar_url" -o "$temp_file" || fail
-  mv "$temp_file" "$jar_name" || fail
+  curl --fail --location --show-error --silent "${jar_url}" -o "${temp_file}" || fail
+  mv "${temp_file}" "${jar_name}" || fail
 
   # create dir for user units
-  ( umask 077 && mkdir --parents "$HOME/.config/systemd/user" ) || fail
+  ( umask 077 && mkdir --parents "${HOME}/.config/systemd/user" ) || fail
 
   # write unit file
   temp_file="$(mktemp)" || fail
-  cat >"$temp_file" <<EOF || fail
+  cat >"${temp_file}" <<EOF || fail
 [Unit]
-Description=$service_name minecraft server
+Description=${service_name} minecraft server
 
 [Service]
 Restart=always
 RestartSec=5s
 Type=exec
-WorkingDirectory=$PWD
+WorkingDirectory=${PWD}
 
 # -XX:+PerfDisableSharedMem -- I don't know if that's still relevant
 #                              https://www.evanjones.ca/jvm-mmap-pause.html
@@ -146,9 +146,9 @@ ExecStart=/usr/bin/java \
   -XX:+PerfDisableSharedMem \
   -XX:+UseZGC \
   -XX:+ZGenerational \
-  ${heap_size:+"-Xms$heap_size"} \
-  ${heap_size:+"-Xmx$heap_size"} \
-  -jar $jar_name \
+  ${heap_size:+"-Xms${heap_size}"} \
+  ${heap_size:+"-Xmx${heap_size}"} \
+  -jar ${jar_name} \
   --nogui
 
 LockPersonality=true
@@ -169,11 +169,11 @@ WantedBy=default.target
 EOF
 
   # replace unit file
-  mv "$temp_file" "$HOME/.config/systemd/user/$service_name.service" || fail
+  mv "${temp_file}" "${HOME}/.config/systemd/user/${service_name}.service" || fail
 
   # start service
-  systemctl --user --quiet reenable "$service_name.service" || fail
-  systemctl --user restart "$service_name.service" || fail
+  systemctl --user --quiet reenable "${service_name}.service" || fail
+  systemctl --user restart "${service_name}.service" || fail
 }
 
 log() {
@@ -181,31 +181,31 @@ log() {
   if [ "$#" -gt 0 ]; then
     commence "$@" || fail
   fi
-  journalctl --user -u "$service_name.service" --since "5min ago" --follow || fail
+  journalctl --user -u "${service_name}.service" --since "5min ago" --follow || fail
 }
 
 status() {
   local exit_status=0
 
-  systemctl --user status "$service_name.service" || exit_status=$?
+  systemctl --user status "${service_name}.service" || exit_status=$?
 
-  if [ "$exit_status" = 0 ]; then
+  if [ "${exit_status}" = 0 ]; then
     return
-  elif [ "$exit_status" = 3 ]; then
+  elif [ "${exit_status}" = 3 ]; then
     # the exit status value is 3 if the service is not running
     exit 3
   else
-    fail --exit-status "$exit_status"
+    fail --exit-status "${exit_status}"
   fi
 }
 
 commence() {
   case "$1" in
     start|stop|restart)
-      systemctl --user "$1" "$service_name.service" || fail
+      systemctl --user "$1" "${service_name}.service" || fail
       ;;
     enable|disable)
-      systemctl --user --now "$1" "$service_name.service" || fail
+      systemctl --user --now "$1" "${service_name}.service" || fail
       ;;
     *)
       # run a function, the function name will be obtained from the first argument

@@ -40,14 +40,14 @@ lxd init --minimal
 Create container:
 
 ```sh
-lxc launch "$image" "$instance"
+lxc launch "${image}" "${instance}"
 ```
 
 Add tcp/udp proxy for Minecraft server:
 
 ```sh
 proxy() {
-  lxc config device add "$instance" "proxy-$proto-$port" proxy "listen=$proto:0.0.0.0:$port" "connect=$proto:127.0.0.1:$port"
+  lxc config device add "${instance}" "proxy-${proto}-${port}" proxy "listen=${proto}:0.0.0.0:${port}" "connect=${proto}:127.0.0.1:${port}"
 }
 
 add() {
@@ -61,7 +61,7 @@ port=25565 add
 Run shell for user "ubuntu" in container:
 
 ```sh
-lxc exec "$instance" -- su - ubuntu
+lxc exec "${instance}" -- su - ubuntu
 ```
 
 # Misc commands
@@ -75,33 +75,33 @@ lxc list
 Show instance config:
 
 ```sh
-lxc config show "$instance"
+lxc config show "${instance}"
 ```
 
 Stop instance:
 
 ```sh
-lxc stop "$instance"
+lxc stop "${instance}"
 ```
 
 Delete instance:
 
 ```sh
-lxc delete "$instance"
+lxc delete "${instance}"
 ```
 
 Check existing proxies:
 
 ```sh
-lxc config device show "$instance"
+lxc config device show "${instance}"
 ```
 
 Remove proxy:
 
 ```sh
 remove() {
-  lxc config device remove "$instance" "proxy-tcp-$port"
-  lxc config device remove "$instance" "proxy-udp-$port"
+  lxc config device remove "${instance}" "proxy-tcp-${port}"
+  lxc config device remove "${instance}" "proxy-udp-${port}"
 }
 
 port=25565 remove
@@ -110,11 +110,11 @@ port=25565 remove
 Limit RAM usage:
 
 ```sh
-lxc config set "$instance" limits.memory=6144MiB
+lxc config set "${instance}" limits.memory=6144MiB
 ```
 
 Run root shell in container:
 
 ```sh
-lxc exec "$instance" -- bash
+lxc exec "${instance}" -- bash
 ```

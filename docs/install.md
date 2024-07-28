@@ -47,7 +47,7 @@ sudo apt-get install java-21-amazon-corretto-jdk
 Allow user to run services when he is not logged in:
 
 ```sh
-sudo loginctl enable-linger "$USER"
+sudo loginctl enable-linger "${USER}"
 ```
 
 Create `~/.local/bin` directory (you may need to reconnect the terminal to get `~/.local/bin` to appear in the search path):
