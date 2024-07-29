@@ -48,13 +48,16 @@ service_name="$(basename "${PWD}")" || fail
 
 while [ "$#" -gt 0 ]; do
   case "$1" in
-    -h|--heap-size)
+    -e|--heap-size)
       heap_size="$2"
       shift; shift
       ;;
     -s|--service-name)
       service_name="$2"
       shift; shift
+      ;;
+    -h|--help)
+      break
       ;;
     -*)
       echo "Unknown option: $1" >&2
@@ -66,7 +69,7 @@ while [ "$#" -gt 0 ]; do
   esac
 done
 
-if [ "$#" = 0 ]; then
+if [ "$#" = 0 ] || [ "${1:-}" == "--help" ]; then
   cat >&2 <<EOF || fail
 Usage:
 
@@ -74,12 +77,17 @@ Usage:
 
 Options:
 
-  --heap-size 6G (if no heap size is specified, OpenJDK defaults will be used, which may be too small for a Minecraft server)
-  --service-name my-server (by default the name of the current directory will be used)
+  -e, --heap-size SIZE     Use SIZE as a heap size
+  -s, --service-name NAME  Use NAME as a service name
+                           If service name is not specified then the name of
+                           the current directory will be used
+
+  -h, --help  display help
 
 Commands:
 
-  deploy [https://example.com/server.jar] (if there is no URL, only the service unit will be updated)
+  deploy URL
+    If there is no URL, only the service unit will be updated
 
   start
   stop
@@ -91,7 +99,8 @@ Commands:
   status
   log
 
-Prefix any command with "log" to monitor the service log after the command has successfully completed:
+Prefix any command with "log" to monitor the service log after the command has
+successfully completed:
 
   oak log restart
 
