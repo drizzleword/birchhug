@@ -4,7 +4,7 @@
 
 # install to "${BASH_COMPLETION_USER_DIR:-"${XDG_DATA_HOME:-"$HOME/.local/share"}/bash-completion"}/completions"
 
-_oak() {
+_bfox() {
   local current="$2" previous="$3"
 
   local options="-s --service-name -h --help"
@@ -32,4 +32,4 @@ _oak() {
   mapfile -t COMPREPLY < <(compgen -W "${options} ${non_composable_commands} log" -- "$current")
 }
 
-complete -F _oak oak
+complete -F _bfox bfox

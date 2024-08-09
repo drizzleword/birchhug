@@ -1,5 +1,5 @@
 <!--
-  Copyright 2024 Oakdeer project contributors
+  Copyright 2024 Birchfox project contributors
 
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -50,16 +50,10 @@ Allow user to run services when he is not logged in:
 sudo loginctl enable-linger "${USER}"
 ```
 
-Create `~/.local/bin` directory (you may need to reconnect the terminal to get `~/.local/bin` to appear in the search path):
+Install the birchfox (you may need to restart your terminal session for `~/.local/bin` to appear in the search path):
 
 ```sh
-( umask 077 && mkdir --parents ~/.local/bin )
-```
-
-Install the oakdeer script:
-
-```sh
-curl --fail --show-error --silent "https://raw.githubusercontent.com/drizzleword/oakdeer/main/bin/oak" --output ~/.local/bin/oak && chmod 750 ~/.local/bin/oak
+curl -Ssf https://raw.githubusercontent.com/drizzleword/birchfox/main/deploy.sh | sh
 ```
 
 # Create server
@@ -87,5 +81,5 @@ Use [PaperMC Build explorer](https://papermc.io/downloads/all) to find server so
 Deploy the server: 
 
 ```sh
-oak log deploy "https://api.papermc.io/v2/projects/paper/versions/1.21/builds/126/downloads/paper-1.21-126.jar"
+bfox log deploy "https://api.papermc.io/v2/projects/paper/versions/1.21/builds/126/downloads/paper-1.21-126.jar"
 ```

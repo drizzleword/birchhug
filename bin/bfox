@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-#  Copyright 2024 Oakdeer project contributors
+#  Copyright 2024 Birchfox project contributors
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -69,7 +69,7 @@ if [ "$#" = 0 ] || [ "${1:-}" == "--help" ]; then
   cat >&2 <<EOF || fail
 Usage:
 
-  oak [OPTIONS...] COMMAND [ARGUMENTS...]
+  bfox [OPTIONS...] COMMAND [ARGUMENTS...]
 
 Options:
 
@@ -97,7 +97,7 @@ Commands:
 Prefix any command with "log" to monitor the service log after the command has
 successfully completed:
 
-  oak log restart
+  bfox log restart
 
 EOF
   exit
