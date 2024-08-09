@@ -14,7 +14,7 @@
   limitations under the License.
 -->
 
-# [Birchfox](https://github.com/drizzleword/birchfox) - a neat tool that helps you to start [Minecraft](https://en.wikipedia.org/wiki/Minecraft) server as a [systemd](https://en.wikipedia.org/wiki/Systemd) service
+# [Birchfox](https://github.com/drizzleword/birchfox) - a neat tool that helps you to start a [Minecraft](https://en.wikipedia.org/wiki/Minecraft) server as a [systemd](https://en.wikipedia.org/wiki/Systemd) service
 
 <img src="birchfox.jpg" width=100%>
 
