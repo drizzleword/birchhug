@@ -19,7 +19,7 @@
 <img src="birch.jpg" width=100%>
 
 
-# Prepare the system (one-time task)
+## Prepare the system (one-time task)
 
 Please refer to [Installing or Updating Java](https://docs.papermc.io/misc/java-install) from [PaperMC Docs](https://docs.papermc.io/) for details.
 
@@ -63,7 +63,7 @@ curl -Ssf https://raw.githubusercontent.com/drizzleword/birchhug/main/deploy.sh 
 
 You may need to restart your terminal session for `~/.local/bin` to appear in the search path.
 
-# Deploy new Minecraft game server with the [PaperMC](https://papermc.io/)
+## Deploy new Minecraft game server with the [PaperMC](https://papermc.io/)
 
 Create the server directory and `cd` into it:
 
@@ -90,13 +90,13 @@ Deploy the server:
 ```sh
 bhug log deploy "https://api.papermc.io/v2/projects/paper/versions/1.21/builds/126/downloads/paper-1.21-126.jar"
 ```
-# Usage
+## Usage
 
 ```sh
 bhug [OPTIONS...] COMMAND [ARGUMENTS...]
 ```
 
-## Options
+### Options
 
 `-s, --service-name NAME`
 
@@ -106,7 +106,7 @@ Use NAME as a service name. If service name is not specified then the name of th
 
 Display help
 
-## Commands
+### Commands
 
 `deploy URL`
 
@@ -148,15 +148,15 @@ bhug log restart
 ```
 
   
-# Miscellaneous notes
+## Miscellaneous notes
 
 * [Use LXD to isolate Minecraft server from the host machine](docs/lxd.md)
 * [Manage Linux server from the Windows desktop](docs/windows.md)
 
-# License
+## License
 
 [Apache License, Version 2.0](LICENSE).
 
-# Contributing to [Birchhug](https://github.com/drizzleword/birchhug) project
+## Contributing to [Birchhug](https://github.com/drizzleword/birchhug) project
 
 Please check [CONTRIBUTING](CONTRIBUTING.md) file for details.
