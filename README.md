@@ -90,7 +90,65 @@ Deploy the server:
 ```sh
 bfox log deploy "https://api.papermc.io/v2/projects/paper/versions/1.21/builds/126/downloads/paper-1.21-126.jar"
 ```
+## Usage
 
+```sh
+bfox [OPTIONS...] COMMAND [ARGUMENTS...]
+```
+
+### Options
+
+`-s, --service-name NAME`
+
+Use NAME as a service name. If service name is not specified then the name of the current directory will be used
+
+`-h, --help`
+
+Display help
+
+### Commands
+
+`deploy URL`
+
+If there is no URL, only the service unit will be updated
+
+`start`
+
+Start systemd service
+
+`stop`
+
+Stop systemd service
+
+`restart`
+
+Restart systemd service
+
+
+`enable`
+
+Enable systemd service
+
+`disable`
+
+Disable systemd service
+
+`status`
+
+Display systemd service status
+
+`log`
+
+Display and follow systemd service log
+
+Prefix any command with `log` to monitor the service log after the command has
+successfully completed:
+
+```sh
+bfox log restart
+```
+
+  
 ## Miscellaneous notes
 
 * [Use LXD to isolate Minecraft server from the host machine](docs/lxd.md)
