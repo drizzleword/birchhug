@@ -76,10 +76,16 @@ Indicate your acceptance of the [Minecraft End(er)-User License Agreement](https
 echo "eula=true" >eula.txt
 ```
 
+Write Java argument file, adjust Xms and Xmx to fit your case:
+
+```sh
+echo "-Xms4G -Xmx12G -XX:+DisableExplicitGC -XX:+PerfDisableSharedMem -XX:+UseZGC -XX:+ZGenerational" > java.argfile
+```
+
 Use [PaperMC Build explorer](https://papermc.io/downloads/all) to find server software version you like.
 
 Deploy the server: 
 
 ```sh
-oak --heap-size 6G log deploy "https://api.papermc.io/v2/projects/paper/versions/1.20.6/builds/148/downloads/paper-1.20.6-148.jar"
+oak --heap-size 6G log deploy "https://api.papermc.io/v2/projects/paper/versions/1.21/builds/126/downloads/paper-1.21-126.jar"
 ```

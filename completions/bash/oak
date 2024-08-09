@@ -7,20 +7,10 @@
 _oak() {
   local current="$2" previous="$3"
 
-  local options="-e --heap-size -s --service-name -h --help"
+  local options="-s --service-name -h --help"
   local non_composable_commands="deploy start stop restart enable disable status"
 
   case "${previous}" in
-    -e|--heap-size)
-      if [[ "${current}" =~ ^[[:digit:]]+$ ]]; then
-        if [ "${current}" -ge 2048 ]; then
-          mapfile -t COMPREPLY < <(compgen -W "${current}M" -- "$current")
-        else
-          mapfile -t COMPREPLY < <(compgen -W "${current}G" -- "$current")
-        fi
-      fi
-      return
-      ;;
     -s|--service-name)
       ;&
     -h|--help)
