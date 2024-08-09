@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-#  Copyright 2024 Birchfox project contributors
+#  Copyright 2024 Birchhug project contributors
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@
 
 # install to "${BASH_COMPLETION_USER_DIR:-"${XDG_DATA_HOME:-"$HOME/.local/share"}/bash-completion"}/completions"
 
-_bfox() {
+_bhug() {
   local current="$2" previous="$3"
 
   local options="-s --service-name -h --help"
@@ -46,4 +46,4 @@ _bfox() {
   mapfile -t COMPREPLY < <(compgen -W "${options} ${non_composable_commands} log" -- "$current")
 }
 
-complete -F _bfox bfox
+complete -F _bhug bhug

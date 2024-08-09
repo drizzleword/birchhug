@@ -1,5 +1,5 @@
 <!--
-  Copyright 2024 Birchfox project contributors
+  Copyright 2024 Birchhug project contributors
 
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -14,9 +14,9 @@
   limitations under the License.
 -->
 
-# [Birchfox](https://github.com/drizzleword/birchfox) - a neat tool that helps you to start a [Minecraft](https://en.wikipedia.org/wiki/Minecraft) server as a [systemd](https://en.wikipedia.org/wiki/Systemd) service
+# [Birchhug](https://github.com/drizzleword/birchhug) - a neat tool that helps you to start a [Minecraft](https://en.wikipedia.org/wiki/Minecraft) server as a [systemd](https://en.wikipedia.org/wiki/Systemd) service
 
-<img src="birchfox.jpg" width=100%>
+<img src="birch.jpg" width=100%>
 
 
 ## Prepare the system (one-time task)
@@ -55,10 +55,10 @@ Allow long-running services for user when he is not logged in:
 sudo loginctl enable-linger "${USER}"
 ```
 
-Install the [Birchfox](https://github.com/drizzleword/birchfox):
+Install the [Birchhug](https://github.com/drizzleword/birchhug):
 
 ```sh
-curl -Ssf https://raw.githubusercontent.com/drizzleword/birchfox/main/deploy.sh | sh
+curl -Ssf https://raw.githubusercontent.com/drizzleword/birchhug/main/deploy.sh | sh
 ```
 
 You may need to restart your terminal session for `~/.local/bin` to appear in the search path.
@@ -88,12 +88,12 @@ Use [PaperMC Build explorer](https://papermc.io/downloads/all) to find server so
 Deploy the server: 
 
 ```sh
-bfox log deploy "https://api.papermc.io/v2/projects/paper/versions/1.21/builds/126/downloads/paper-1.21-126.jar"
+bhug log deploy "https://api.papermc.io/v2/projects/paper/versions/1.21/builds/126/downloads/paper-1.21-126.jar"
 ```
 ## Usage
 
 ```sh
-bfox [OPTIONS...] COMMAND [ARGUMENTS...]
+bhug [OPTIONS...] COMMAND [ARGUMENTS...]
 ```
 
 ### Options
@@ -144,7 +144,7 @@ Prefix any command with `log` to monitor the service log after the command has
 successfully completed:
 
 ```sh
-bfox log restart
+bhug log restart
 ```
 
   
@@ -157,6 +157,6 @@ bfox log restart
 
 [Apache License, Version 2.0](LICENSE).
 
-## Contributing to [Birchfox](https://github.com/drizzleword/birchfox) project
+## Contributing to [Birchhug](https://github.com/drizzleword/birchhug) project
 
 Please check [CONTRIBUTING](CONTRIBUTING.md) file for details.

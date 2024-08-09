@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-#  Copyright 2024 Birchfox project contributors
+#  Copyright 2024 Birchhug project contributors
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -22,10 +22,10 @@ set -o nounset
 
 # Install script
 curl --fail --show-error --silent \
-  "https://raw.githubusercontent.com/drizzleword/birchfox/main/bin/bfox" \
-  --output "${HOME}/.local/bin/bfox"
+  "https://raw.githubusercontent.com/drizzleword/birchhug/main/bin/bhug" \
+  --output "${HOME}/.local/bin/bhug"
   
-chmod 750 "${HOME}/.local/bin/bfox"
+chmod 750 "${HOME}/.local/bin/bhug"
 
 # Set completions dir path
 completions_dir="${BASH_COMPLETION_USER_DIR:-"${XDG_DATA_HOME:-"$HOME/.local/share"}/bash-completion"}/completions"
@@ -35,5 +35,5 @@ completions_dir="${BASH_COMPLETION_USER_DIR:-"${XDG_DATA_HOME:-"$HOME/.local/sha
 
 # Install completions file
 curl --fail --show-error --silent \
-  "https://raw.githubusercontent.com/drizzleword/birchfox/main/completions/bash/bfox" \
-  --output "${completions_dir}/bfox"
+  "https://raw.githubusercontent.com/drizzleword/birchhug/main/completions/bash/bhug" \
+  --output "${completions_dir}/bhug"
