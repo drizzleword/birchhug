@@ -63,7 +63,7 @@ curl -Ssf https://raw.githubusercontent.com/drizzleword/birchfox/main/deploy.sh 
 
 You may need to restart your terminal session for `~/.local/bin` to appear in the search path.
 
-## Make new Minecraft server
+## Deploy new Minecraft game server with [Paper](https://papermc.io/)
 
 Create the server directory and `cd` into it:
 
@@ -100,6 +100,6 @@ bfox log deploy "https://api.papermc.io/v2/projects/paper/versions/1.21/builds/1
 
 [Apache License, Version 2.0](LICENSE).
 
-## Contributing to Birchfox project
+## Contributing to [Birchfox](https://github.com/drizzleword/birchfox) project
 
 Please check [CONTRIBUTING](CONTRIBUTING.md) file for details.
