@@ -14,7 +14,7 @@
   limitations under the License.
 -->
 
-<img src="bfox.jpg" width=100%>
+<img src="birchfox.jpg" width=100%>
 
 # Docs
 
