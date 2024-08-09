@@ -124,7 +124,6 @@ Stop systemd service
 
 Restart systemd service
 
-
 `enable`
 
 Enable systemd service
