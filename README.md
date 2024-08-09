@@ -14,10 +14,92 @@
   limitations under the License.
 -->
 
+# [Birchfox](https://github.com/drizzleword/birchfox) - a neat tool that helps you to start [Minecraft](https://en.wikipedia.org/wiki/Minecraft) server as a [systemd](https://en.wikipedia.org/wiki/Systemd) service
+
 <img src="birchfox.jpg" width=100%>
 
-# Docs
 
-* [Install](docs/install.md)
-* [LXD](docs/lxd.md)
-* [Windows](docs/windows.md)
+## Prepare the system (one-time task)
+
+Please refer to [Installing or Updating Java](https://docs.papermc.io/misc/java-install) from [PaperMC Docs](https://docs.papermc.io/) for details.
+
+Add APT source for [Amazon Corretto OpenJDK](https://aws.amazon.com/corretto/):
+
+```sh
+curl --fail --show-error --silent "https://apt.corretto.aws/corretto.key" | gpg --dearmor | sudo tee "/etc/apt/keyrings/corretto.gpg" | grep --quiet . && echo "deb [signed-by=/etc/apt/keyrings/corretto.gpg] https://apt.corretto.aws stable main" | sudo tee "/etc/apt/sources.list.d/corretto.list" >/dev/null
+```
+
+Update APT sources:
+
+```sh
+sudo apt-get update
+```
+
+Update system packages:
+
+```sh
+sudo apt-get dist-upgrade
+```
+
+Check out [Amazon Corretto OpenJDK distribution](https://aws.amazon.com/corretto/) page to find latest Long Term Support (LTS) version.
+
+Install Corretto, specify another version (instead of `21` here) if needed:
+
+```sh
+sudo apt-get install java-21-amazon-corretto-jdk
+```
+
+Allow long-running services for user when he is not logged in:
+
+```sh
+sudo loginctl enable-linger "${USER}"
+```
+
+Install the [Birchfox](https://github.com/drizzleword/birchfox):
+
+```sh
+curl -Ssf https://raw.githubusercontent.com/drizzleword/birchfox/main/deploy.sh | sh
+```
+
+You may need to restart your terminal session for `~/.local/bin` to appear in the search path.
+
+## Make new Minecraft server
+
+Create the server directory and `cd` into it:
+
+```sh
+mkdir my-minecraft-server && cd my-minecraft-server
+```
+
+Indicate your acceptance of the [Minecraft End(er)-User License Agreement](https://www.minecraft.net/en-us/eula):
+
+```sh
+echo "eula=true" >eula.txt
+```
+
+Write Java argument file (adjust `-Xms` and `-Xmx` to fit your case):
+
+```sh
+echo "-Xms4G -Xmx12G -XX:+DisableExplicitGC -XX:+PerfDisableSharedMem -XX:+UseZGC -XX:+ZGenerational" > java.argfile
+```
+
+Use [PaperMC Build explorer](https://papermc.io/downloads/all) to find server software version you like and note the `.jar` file URL.
+
+Deploy the server: 
+
+```sh
+bfox log deploy "https://api.papermc.io/v2/projects/paper/versions/1.21/builds/126/downloads/paper-1.21-126.jar"
+```
+
+## Miscellaneous notes
+
+* [Use LXD to isolate Minecraft server from the host machine](docs/lxd.md)
+* [Manage Linux server from Windows desktop](docs/windows.md)
+
+## License
+
+[Apache License, Version 2.0](LICENSE).
+
+## Contributing to Birchfox project
+
+Please check [CONTRIBUTING](CONTRIBUTING.md) file for details.

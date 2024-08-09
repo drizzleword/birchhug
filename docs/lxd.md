@@ -14,7 +14,9 @@
   limitations under the License.
 -->
 
-# Container setup via [LXD](https://canonical.com/lxd)
+# Use [LXD](https://canonical.com/lxd) to isolate Minecraft server from the host machine
+
+## Container setup
 
 Set variables:
 
@@ -64,7 +66,7 @@ Run shell for user "ubuntu" in container:
 lxc exec "${instance}" -- su - ubuntu
 ```
 
-# Misc commands
+## Helpful commands
 
 List instances:
 

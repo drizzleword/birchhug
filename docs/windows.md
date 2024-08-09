@@ -14,7 +14,9 @@
   limitations under the License.
 -->
 
-## Connect to ssh server from Windows desktop
+# Manage Linux server from Windows desktop
+
+## Connect by SSH 
 
 Install [OpenSSH Client](https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_install_firstuse) and [Windows Terminal](https://learn.microsoft.com/en-us/windows/terminal/install).
 
@@ -24,7 +26,7 @@ Install [OpenSSH Client](https://learn.microsoft.com/en-us/windows-server/admini
 ssh-keygen -t ed25519
 ```
 
-## Manage remote files and code from Windows desktop
+## Manage remote files and code
 
 If you are on Windows, [WinSCP](https://sourceforge.net/projects/winscp/) might help you to manage remote files, install it via [Chocolatey](https://chocolatey.org/install) (use administrative shell):
 
