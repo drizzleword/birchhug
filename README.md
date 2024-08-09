@@ -14,6 +14,8 @@
   limitations under the License.
 -->
 
+<img src="bfox.jpg" width=100%>
+
 # Docs
 
 * [Install](docs/install.md)
