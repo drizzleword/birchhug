@@ -18,8 +18,6 @@
 
 Please refer to [Installing or Updating Java](https://docs.papermc.io/misc/java-install) from [PaperMC Docs](https://docs.papermc.io/) for details.
 
-Check out [Amazon Corretto OpenJDK distribution](https://aws.amazon.com/corretto/) page to find latest Long Term Support (LTS) version.
-
 Add APT source for Corretto:
 
 ```sh
@@ -38,7 +36,9 @@ Update system:
 sudo apt-get dist-upgrade
 ```
 
-Install Corretto (note the version here):
+Check out [Amazon Corretto OpenJDK distribution](https://aws.amazon.com/corretto/) page to find latest Long Term Support (LTS) version.
+
+Install Corretto (specify another version instead of `21` here, if needed):
 
 ```sh
 sudo apt-get install java-21-amazon-corretto-jdk
@@ -76,7 +76,7 @@ Indicate your acceptance of the [Minecraft End(er)-User License Agreement](https
 echo "eula=true" >eula.txt
 ```
 
-Write Java argument file, adjust Xms and Xmx to fit your case:
+Write Java argument file (adjust `-Xms` and `-Xmx` to fit your case):
 
 ```sh
 echo "-Xms4G -Xmx12G -XX:+DisableExplicitGC -XX:+PerfDisableSharedMem -XX:+UseZGC -XX:+ZGenerational" > java.argfile
@@ -87,5 +87,5 @@ Use [PaperMC Build explorer](https://papermc.io/downloads/all) to find server so
 Deploy the server: 
 
 ```sh
-oak --heap-size 6G log deploy "https://api.papermc.io/v2/projects/paper/versions/1.21/builds/126/downloads/paper-1.21-126.jar"
+oak log deploy "https://api.papermc.io/v2/projects/paper/versions/1.21/builds/126/downloads/paper-1.21-126.jar"
 ```
