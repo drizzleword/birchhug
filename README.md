@@ -63,7 +63,7 @@ curl -Ssf https://raw.githubusercontent.com/drizzleword/birchfox/main/deploy.sh 
 
 You may need to restart your terminal session for `~/.local/bin` to appear in the search path.
 
-## Deploy new Minecraft game server with [Paper](https://papermc.io/)
+## Deploy new Minecraft game server with the [PaperMC](https://papermc.io/)
 
 Create the server directory and `cd` into it:
 
