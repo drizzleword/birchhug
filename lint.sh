@@ -14,4 +14,4 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
-find . -type f -name '*.sh' -print0 -o -type f -path './bin/*' -print0 | xargs -0 shellcheck
+find . -type f -name '*.sh' -print0 -o -type f -path './bin/*' -print0 -o -type f -path './completions/*' -print0 | xargs -0 shellcheck
