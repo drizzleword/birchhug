@@ -94,7 +94,7 @@ bfox log deploy "https://api.papermc.io/v2/projects/paper/versions/1.21/builds/1
 ## Miscellaneous notes
 
 * [Use LXD to isolate Minecraft server from the host machine](docs/lxd.md)
-* [Manage Linux server from Windows desktop](docs/windows.md)
+* [Manage Linux server from the Windows desktop](docs/windows.md)
 
 ## License
 

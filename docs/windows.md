@@ -14,7 +14,7 @@
   limitations under the License.
 -->
 
-# Manage Linux server from Windows desktop
+# Manage Linux server from the Windows desktop
 
 ## Connect by SSH 
 
