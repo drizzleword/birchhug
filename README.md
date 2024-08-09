@@ -14,7 +14,9 @@
   limitations under the License.
 -->
 
-# [Birchhug](https://github.com/drizzleword/birchhug) - a neat tool that helps you to start a [Minecraft](https://en.wikipedia.org/wiki/Minecraft) server as a [systemd](https://en.wikipedia.org/wiki/Systemd) service
+# Birchhug
+
+[Birchhug](https://github.com/drizzleword/birchhug) is a tool that helps you to start a [Minecraft](https://en.wikipedia.org/wiki/Minecraft) server on [Linux](https://en.wikipedia.org/wiki/Linux) as a [systemd](https://en.wikipedia.org/wiki/Systemd) service.
 
 <img src="birch.jpg" width=100%>
 
