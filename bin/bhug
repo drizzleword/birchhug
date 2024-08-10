@@ -77,7 +77,7 @@ Options:
                            If service name is not specified then the name of
                            the current directory will be used
 
-  -h, --help  display help
+  -h, --help               Display help
 
 Commands:
 
