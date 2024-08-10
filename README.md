@@ -14,7 +14,7 @@
   limitations under the License.
 -->
 
-# Birchhug
+# [Birchhug](https://github.com/drizzleword/birchhug)
 
 [Birchhug](https://github.com/drizzleword/birchhug) is a tool that helps you to start a [Minecraft](https://en.wikipedia.org/wiki/Minecraft) server on [Linux](https://en.wikipedia.org/wiki/Linux) as a [systemd](https://en.wikipedia.org/wiki/Systemd) service.
 
@@ -68,7 +68,7 @@ curl -Ssf https://raw.githubusercontent.com/drizzleword/birchhug/main/deploy.sh 
 
 You may need to restart your terminal session for `~/.local/bin` to appear in the search path.
 
-## Deploy new Minecraft game server with the [PaperMC](https://papermc.io/)
+## Deploy new [Minecraft](https://en.wikipedia.org/wiki/Minecraft) game server with the [PaperMC](https://papermc.io/)
 
 Create the server directory and `cd` into it:
 
