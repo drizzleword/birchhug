@@ -99,7 +99,7 @@ bhug log deploy "https://api.papermc.io/v2/projects/paper/versions/1.21/builds/1
 ## [Birchhug](https://github.com/drizzleword/birchhug) command line tool usage instructions
 
 ```sh
-bhug [OPTIONS...] COMMAND [ARGUMENTS...]
+bhug [ OPTIONS... ] COMMAND [ ARGUMENTS... ]
 ```
 
 ### Options
@@ -114,9 +114,9 @@ Display help
 
 ### Commands
 
-`deploy URL`
+`deploy [ URL | JAR_FILE | STARTUP_SCRIPT ]`
 
-If there is no URL, only the service unit will be updated
+Deploy the server
 
 `start`
 

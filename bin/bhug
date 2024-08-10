@@ -69,7 +69,7 @@ if [ "$#" = 0 ] || [ "${1:-}" == "--help" ]; then
   cat >&2 <<EOF || fail
 Usage:
 
-  bhug [OPTIONS...] COMMAND [ARGUMENTS...]
+  bhug [ OPTIONS... ] COMMAND [ ARGUMENTS... ]
 
 Options:
 
@@ -81,8 +81,7 @@ Options:
 
 Commands:
 
-  deploy URL
-    If there is no URL, only the service unit will be updated
+  deploy [ URL | JAR_FILE | STARTUP_SCRIPT ]
 
   start
   stop
