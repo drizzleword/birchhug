@@ -21,6 +21,10 @@
 <img src="birch.jpg" width=100%>
 
 
+# How to run a [Minecraft](https://en.wikipedia.org/wiki/Minecraft) server
+
+The following instructions describe the installation of a [Minecraft](https://en.wikipedia.org/wiki/Minecraft) server on [Linux](https://en.wikipedia.org/wiki/Linux) distribution that has a [APT](https://en.wikipedia.org/wiki/APT_(software)) package manager. A good choice for such a distribution is [Debian](https://www.debian.org/) or [Ubuntu](https://ubuntu.com/).
+
 ## Prepare the system (one-time task)
 
 Please refer to [Installing or Updating Java](https://docs.papermc.io/misc/java-install) from [PaperMC Docs](https://docs.papermc.io/) for details.
@@ -92,7 +96,7 @@ Deploy the server:
 ```sh
 bhug log deploy "https://api.papermc.io/v2/projects/paper/versions/1.21/builds/126/downloads/paper-1.21-126.jar"
 ```
-## Usage
+## [Birchhug](https://github.com/drizzleword/birchhug) command line tool usage instructions
 
 ```sh
 bhug [OPTIONS...] COMMAND [ARGUMENTS...]
