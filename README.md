@@ -106,45 +106,34 @@ bhug [ OPTIONS... ] COMMAND [ ARGUMENTS... ]
 
 `-s, --service-name NAME`
 
-Use NAME as a service name. If service name is not specified then the name of the current directory will be used
+Use NAME as a service name. If service name is not specified then the name of the current directory will be used.
 
 `-h, --help`
 
-Display help
+Display help.
 
 ### Commands
 
 `deploy URL | JAR_FILE | STARTUP_SCRIPT`
 
-Deploy the server
+Deploy the server.
 
-`start`
+`start` / `stop` / `restart`
 
-Start systemd service
+Start/stop/restart systemd service.
 
-`stop`
+`enable` / `disable`
 
-Stop systemd service
+Enable/disable systemd service.
 
-`restart`
-
-Restart systemd service
-
-`enable`
-
-Enable systemd service
-
-`disable`
-
-Disable systemd service
 
 `status`
 
-Display systemd service status
+Display systemd service status.
 
 `log`
 
-Display and follow systemd service log
+Display and follow systemd service log.
 
 Prefix any command with `log` to monitor the service log after the command has
 successfully completed:
