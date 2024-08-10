@@ -81,7 +81,7 @@ Options:
 
 Commands:
 
-  deploy [ URL | JAR_FILE | STARTUP_SCRIPT ]
+  deploy URL | JAR_FILE | STARTUP_SCRIPT
 
   start
   stop

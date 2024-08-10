@@ -114,7 +114,7 @@ Display help
 
 ### Commands
 
-`deploy [ URL | JAR_FILE | STARTUP_SCRIPT ]`
+`deploy URL | JAR_FILE | STARTUP_SCRIPT`
 
 Deploy the server
 
