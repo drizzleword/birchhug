@@ -18,22 +18,22 @@ set -o errexit
 set -o nounset
 
 # Create ~/.local/bin directory if needed
-( umask 077 && mkdir -p "${HOME}/.local/bin" )
+( umask 077 && mkdir -p "${HOME}/.local/bin" ) || { echo "Unable to make bin directory" >&2; exit 1; }
 
 # Install script
 curl --fail --show-error --silent \
   "https://raw.githubusercontent.com/drizzleword/birchhug/main/bin/bhug" \
-  --output "${HOME}/.local/bin/bhug"
+  --output "${HOME}/.local/bin/bhug" || { echo "Unable to download executable file" >&2; exit 1; }
   
-chmod 750 "${HOME}/.local/bin/bhug"
+chmod 750 "${HOME}/.local/bin/bhug" || { echo "Unable to chmod executable file" >&2; exit 1; }
 
 # Set completions dir path
-completions_dir="${BASH_COMPLETION_USER_DIR:-"${XDG_DATA_HOME:-"$HOME/.local/share"}/bash-completion"}/completions"
+completions_dir="${BASH_COMPLETION_USER_DIR:-"${XDG_DATA_HOME:-"$HOME/.local/share"}/bash-completion"}/completions" || { echo "Unable to set completions directory path" >&2; exit 1; }
 
 # Create completions dir if needed
-( umask 077 && mkdir -p "${completions_dir}" )
+( umask 077 && mkdir -p "${completions_dir}" ) || { echo "Unable to make completions directory" >&2; exit 1; }
 
 # Install completions file
 curl --fail --show-error --silent \
   "https://raw.githubusercontent.com/drizzleword/birchhug/main/completions/bash/bhug" \
-  --output "${completions_dir}/bhug"
+  --output "${completions_dir}/bhug" || { echo "Unable to download completions file" >&2; exit 1; }
